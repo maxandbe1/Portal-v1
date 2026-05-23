@@ -13,7 +13,8 @@ export default function PortalPage() {
     const target = e.target.getAttribute("data-route");
     if (!target) return;
 
-    const next = route(activeModule, { toModule: target });
+    import { identity } from "../../runtime/identityEngine";
+
     state.setActiveModule(next);
     setActiveModule(next);
   }
