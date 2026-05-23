@@ -5,6 +5,7 @@ import ModuleFrame from "../../components/ModuleFrame";
 import { moduleRegistry } from "../../runtime/moduleRegistry";
 import { state } from "../../runtime/stateEngine";
 import { route } from "../../runtime/routingEngine";
+import { identity } from "../../runtime/identityEngine"; // <-- ADD THIS
 
 export default function PortalPage() {
   const [activeModule, setActiveModule] = useState(state.activeModule);
@@ -13,9 +14,7 @@ export default function PortalPage() {
     const target = e.target.getAttribute("data-route");
     if (!target) return;
 
-    import { identity } from "../../runtime/identityEngine";
-    const next = route(activeModule, { toModule: target }, identity);
-
+    const next = route(activeModule, { toModule: target }, identity); // <-- FIXED
     state.setActiveModule(next);
     setActiveModule(next);
   }
@@ -30,4 +29,3 @@ export default function PortalPage() {
     </div>
   );
 }
-
