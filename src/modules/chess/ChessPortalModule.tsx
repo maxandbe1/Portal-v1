@@ -1,15 +1,23 @@
-export default function ChessPortalModule() {
-  return (
-    <div style={{ padding: 24 }}>
-      <h1>Chess Suite</h1>
-      <p>This is the web entry for the Chess Suite.</p>
+"use client";
 
-      <ul>
-        <li>Training</li>
-        <li>Puzzles</li>
-        <li>Analysis</li>
-      </ul>
+import { useState } from "react";
+import ChessSuiteHome from "./ChessSuiteHome";
+import TrainingView from "./TrainingView";
+
+export default function ChessPortalModule() {
+  const [screen, setScreen] = useState("home");
+
+  function handleClick(e) {
+    const route = e.target.getAttribute("data-route");
+    if (!route) return;
+
+    if (route === "chess-training") setScreen("training");
+  }
+
+  return (
+    <div onClick={handleClick}>
+      {screen === "home" && <ChessSuiteHome />}
+      {screen === "training" && <TrainingView />}
     </div>
   );
 }
-
