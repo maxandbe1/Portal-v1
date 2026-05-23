@@ -24,7 +24,7 @@ export default function PortalPage() {
   return (
     <div onClick={handleClick}>
       <ModuleFrame>
-        <Module />
+        import { Suspense } from "react";
       </ModuleFrame>
     </div>
   );
