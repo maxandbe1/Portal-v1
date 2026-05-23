@@ -14,6 +14,7 @@ export default function PortalPage() {
     if (!target) return;
 
     import { identity } from "../../runtime/identityEngine";
+    const next = route(activeModule, { toModule: target }, identity);
 
     state.setActiveModule(next);
     setActiveModule(next);
