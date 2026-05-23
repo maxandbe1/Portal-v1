@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import ModuleFrame from "../../components/ModuleFrame";
 import { moduleRegistry } from "../../runtime/moduleRegistry";
 import { state } from "../../runtime/stateEngine";
 import { route } from "../../runtime/routingEngine";
-import { identity } from "../../runtime/identityEngine"; // <-- ADD THIS
+import { identity } from "../../runtime/identityEngine";
 
 export default function PortalPage() {
   const [activeModule, setActiveModule] = useState(state.activeModule);
@@ -14,7 +14,7 @@ export default function PortalPage() {
     const target = e.target.getAttribute("data-route");
     if (!target) return;
 
-    const next = route(activeModule, { toModule: target }, identity); // <-- FIXED
+    const next = route(activeModule, { toModule: target }, identity);
     state.setActiveModule(next);
     setActiveModule(next);
   }
@@ -24,7 +24,9 @@ export default function PortalPage() {
   return (
     <div onClick={handleClick}>
       <ModuleFrame>
-        import { Suspense } from "react";
+        <Suspense fallback={<div>Loading...</div>}>
+          <Module />
+        </Suspense>
       </ModuleFrame>
     </div>
   );
